@@ -1,0 +1,35 @@
+{% extends "base.php.twig" %}
+{% block titulo %} Puestos - Vendedor {% endblock %}
+{% block script %}<script src="https://kit.fontawesome.com/51f8fb14ab.js" crossorigin="anonymous"></script>{% endblock %}
+{% block body %}
+<body>
+{% endblock %}
+{% block contenido %}
+<div id="content">
+<h4><a href="index.php?con=puesto&op=anadir&id={{ usuario.idUsuario }}" style="margin-left:5%;" >Añadir Puesto</a></h4>
+	<table class="table" style="width:90%;margin:auto">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Información</th>
+            <th>Telefono</th>
+            <th>Editar</th>
+            <th>Borrar</th>
+        </tr>
+        </thead>
+	{% for item in puestos %}
+	
+        <tbody>
+        <tr class="table-primary">
+            <td>{{ item.nombre}}</td>
+            <td>{{ item.infoPuesto}}</td>
+            <td>{{ item.telefono }}</td>
+            <td><div class="text-center"><a class="fas fa-pencil-alt" href="index.php?con=puesto&op=editar&id={{ usuario.idUsuario }}&idPuesto={{ item.idPuesto }}"></a></div></td>
+            <td><div class="text-center"><a class="fas fa-trash-alt" href="index.php?con=puesto&op=delete&id={{ usuario.idUsuario }}&idPuesto={{ item.idPuesto }}" ></a></div></td>
+        </tr>
+	{% endfor %}
+        </tbody>
+    </table>
+	</div>
+</div>
+{% endblock %}

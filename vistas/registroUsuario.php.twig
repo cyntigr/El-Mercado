@@ -1,0 +1,138 @@
+{% extends "base.php.twig" %}
+{% block titulo %}Registro Usuario{% endblock %}
+{% block menu %}
+{% endblock %}
+{% block contenido %}
+<div class="color"></div>
+<div id="conte">
+    <div class="container">
+
+        <!-- Titulo -->
+        <div class="row">
+            <div class="col-sd-12 mx-auto">
+                <h1>Mercado Municipal</h1>
+            </div>
+        </div>
+
+        <!-- formulario de creación de nuevo usuario -->
+        <form method="get">
+            <input type="hidden"  name="con" value="usuario">
+            <input type="hidden"  name="op" value="anadir">
+
+            <!-- correo electrónico -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="email">Correo Electrónico:</label>
+                    <input class="form-control" type="email" name="email" placeholder="email@flixnet.com" required />
+                </div>
+            </div>
+
+            <!-- nombre -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="nombre">Nombre:</label>
+                    <input class="form-control" type="text" name="nombre" required />
+                </div>
+            </div>
+
+            <!-- apellidos -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="apellidos">Apellidos:</label>
+                    <input class="form-control" type="text" name="apellido" required />
+                </div>
+            </div>
+
+            <!-- telefono -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="apellidos">Teléfono:</label>
+                    <input class="form-control" type="text" name="telefono" required />
+                </div>
+            </div>
+
+            <!-- contraseña -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="pass">Contraseña:</label>
+                    <input class="form-control" type="password" name="pass" required />
+                </div>
+            </div>
+
+            <!-- confirmación contraseña -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="conf">Confirmación contraseña:</label>
+                    <input class="form-control" type="password" name="conf" required />
+                </div>
+            </div>
+
+            <!-- foto -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="foto">Foto de perfil:</label>
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="customFile" name="foto">
+                        <label class="custom-file-label" for="foto">Elige la imagen</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <label class="col-form-label" for="foto">Crear perfil de vendedor:</label></br>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="vendedor" value="true">Si
+                        </label>
+                    </div>
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="vendedor" value="false">No
+                        </label>
+                    </div>
+                    <label class="col-form-label" for="foto">Solo para aquellas personas que tienen un puesto en el Mercado,
+                    se verificaran los datos una vez dado de alta y se le darán los permisos necesarios si todo es correcto.
+                    </label>
+                </div>
+            </div>
+
+
+            <!-- registro -->
+            <div class="row form-group">
+                <div class="col-md-4 mx-auto">
+                    <button class="btn btn-success btn-ses w-100" type="submit">Registrar</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- volver atrás -->
+        <div class="row">
+            <div class="col-md-4 mx-auto text-center">
+                <form method="get">
+                    <input type="hidden"  name="con" value="login">
+                    <input type="hidden"  name="op" value="inicio">
+                    <button type="submit" id="regist" class="btn btn-success btn-ses w-100" role="button">Volver atrás</button>
+                </form>
+            </div>
+        </div>
+        </br>
+    </div> <!-- container -->
+</div> <!-- conte -->
+{% if respuesta == "error" %} 
+    <div class="alert alert-danger w-50 mx-auto" style="margin-bottom:20px">
+     Ha ocurrido un error en el registro 
+    </div>
+{% elseif respuesta == "contraseña" %}
+    <div class="alert alert-danger w-50 mx-auto" style="margin-bottom:20px">
+        Las contraseñas no coinciden.
+    </div>
+{% endif %}
+{% endblock %}
+{% block script2 %}
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+{% endblock %}

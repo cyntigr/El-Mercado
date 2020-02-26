@@ -1,0 +1,39 @@
+{% extends "base.php.twig" %}
+{% block titulo %} {{ puesto.nombre }} {% endblock %}
+{% block script %}
+
+{% endblock %}
+{% block body %}
+<body>
+{% endblock %}
+{% block contenido %}
+<div id="content">
+	
+	<img src="img/{{ puesto.foto }}" class="img-thumbnail mx-auto d-block w-35" alt="{{ puesto.foto }}">
+
+	<h5 class="text-center">{{ puesto.nombre }}</h5>
+    
+	<div class="mx-auto w-35">
+		<p class="text-justify">{{ puesto.infoPuesto }}</p>
+		<strong>Telefono Contacto: </strong><p>{{ puesto.telefono }}</p>
+	</div>
+	<div class="mx-auto w-35 espacioFinal">
+        <form method="get" id="favorito">
+            <input type="hidden"  name="con" value="usuario">
+            <input type="hidden"  name="op" value="favorito">
+            <input type="hidden"  name="id" value="{{ usuario.idUsuario}}">
+            <input type="hidden"  name="idPuesto" value="{{ puesto.idPuesto}}">
+        </form>
+        <form method="get" id="noFavorito">
+            <input type="hidden"  name="con" value="usuario">
+            <input type="hidden"  name="op" value="noFavorito">
+            <input type="hidden"  name="id" value="{{ usuario.idUsuario}}">
+            <input type="hidden"  name="idPuesto" value="{{ puesto.idPuesto}}">
+        </form>
+        
+        <button class="btn btn-primary" form="favorito"  type="submit">Añadir Favoritos</button>
+        <button class="btn btn-primary" form="noFavorito"  type="submit">Eliminar Favoritos</button>
+	</div>
+
+</div>
+{% endblock %}

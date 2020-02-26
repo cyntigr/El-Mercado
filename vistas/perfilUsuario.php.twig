@@ -1,0 +1,140 @@
+{% extends "base.php.twig" %}
+{% block titulo %}Perfil Usuario{% endblock %}
+{% block body %}
+<body>
+{% endblock %}
+{% block contenido %}
+
+<div id="posicionFoto">
+    <img class="fotoPerfil" src="img/{{ usuario.foto }}">
+</div>
+
+<!-- formulario de modificación usuario -->
+<form method="get">
+    <input type="hidden"  name="con" value="usuario">
+    <input type="hidden"  name="op" value="modificar">
+    <input type="hidden"  name="id" value="{{ usuario.idUsuario}}">
+
+    <!-- foto -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="foto">Foto de perfil:</label>
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="foto">
+                <label class="custom-file-label" for="foto">Elige la foto</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- correo electronico -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="email">Correo Electrónico:</label>
+            <input class="form-control" value="{{ usuario.email }}" type="email" name="email" placeholder="email@flixnet.com" required />
+        </div>
+    </div>
+
+    <!-- nombre -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="nombre">Nombre:</label>
+            <input class="form-control" value="{{ usuario.nombre }}" type="text" name="nombre" required />
+        </div>
+    </div>
+
+    <!-- apellidos -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="apellido">Apellidos:</label>
+            <input class="form-control" value="{{ usuario.apellido }}" type="text" name="apellido" required />
+        </div>
+    </div>
+
+    <!-- telefono -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="telefono">Teléfono:</label>
+            <input class="form-control" value="{{ usuario.telefono }}" type="text" name="telefono" required />
+        </div>
+    </div>
+
+    <!-- update -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <button class="btn btn-success btn-ses w-100" type="submit">Guardar cambios</button>
+        </div>
+    </div>
+</form>
+<!-- baja -->
+<div class="row form-group">
+    <div class="col-md-4 mx-auto">
+        <button type="button" class="btn btn-danger btn-ses w-100" data-toggle="modal" data-target="#myModal">
+            Dar de baja
+        </button>
+    </div>
+</div>
+{% if usuario.apiKey == null  %}
+<!-- Solicitar Api -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <button class="btn btn-info btn-ses w-100" form="api" type="submit">Generar ApiKey</button>
+            <form method="get" id="api">
+                <input type="hidden"  name="con" value="usuario">
+                <input type="hidden"  name="op" value="creaApi">
+                <input type="hidden"  name="id" value="{{ usuario.idUsuario}}">
+            </form>
+        </div>
+    </div>
+{% else %}
+<!-- apellidos -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="apellido">ApiKey:</label>
+            <input class="form-control" value="{{ usuario.apiKey }}" type="text" name="apiKey" disabled/>
+        </div>
+    </div>
+{% endif %}
+
+<!-- Modal de borrar -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                ¿ Estas seguro que quieres eliminar tu perfil ?
+                Se borraran todos los datos relacionados con tu cuenta.
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                <form method="get" id="delete">
+                    <input type="hidden"  name="con" value="usuario">
+                    <input type="hidden"  name="op" value="delete">
+                    <input type="hidden"  name="id" value="{{ usuario.idUsuario}}">
+                </form>
+                <button type="submit" form="delete" class="btn btn-success">Si</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% if respuesta == "error" %}
+    <div class="alert alert-danger w-50 mx-auto" style="margin-bottom:20px">
+        No se han actualizado los datos.
+    </div>;
+{% elseif respuesta == "actualizado" %}
+    <div class="alert alert-success w-50 mx-auto" style="margin-bottom:20px">
+        Se han actualizado correctamente los datos.
+    </div>
+{% endif %}
+{% endblock %}
+{% block script2 %}
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.php.twig" %}
+{% block titulo %}Editar Puesto{% endblock %}
+{% block body %}
+<body>
+{% endblock %}
+{% block contenido %}
+<!-- formulario de modificación usuario -->
+<form method="get">
+    <input type="hidden"  name="con" value="puesto">
+    {% if puesto == true %}
+    <input type="hidden"  name="op" value="modificar">
+    {% else %}
+    <input type="hidden"  name="op" value="nuevo">
+    {% endif %}
+    <input type="hidden"  name="id" value="{{ usuario.idUsuario }}">
+    <input type="hidden"  name="idPuesto" value="{{ puesto.idPuesto }}">
+
+    <img src="img/{{ puesto.foto }}" class="img-thumbnail mx-auto d-block w-35" alt="{{ puesto.foto }}">
+    
+    <!-- foto -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="foto">Foto Puesto:</label>
+            <div class="custom-file mb-3">
+                <input type="file" class="custom-file-input" id="customFile" name="foto">
+                <label class="custom-file-label" for="foto">Elige la foto</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- nombre -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="nombre">Nombre:</label>
+            <input class="form-control" value="{{ puesto.nombre }}" type="text" name="nombre" required />
+        </div>
+    </div>
+
+    <!-- telefono -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label class="col-form-label" for="telefono">Teléfono:</label>
+            <input class="form-control" value="{{ puesto.telefono }}" type="text" name="telefono" required />
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <label for="comment">Información Puesto:</label>
+            <textarea class="form-control" name="infoPuesto" style="height:200px" required>{{ puesto.infoPuesto }}</textarea>
+        </div>
+    </div>
+
+    <!-- modificar -->
+    <div class="row form-group">
+        <div class="col-md-4 mx-auto">
+            <button class="btn btn-success btn-ses w-100" type="submit"> Guardar </button>
+        </div>
+    </div>
+</form>
+
+{% if respuesta == "error" %}
+    <div class="alert alert-danger w-50 mx-auto" style="margin-bottom:20px">
+        No se han actualizado los datos.
+    </div>;
+{% elseif respuesta == "actualizado" %}
+    <div class="alert alert-success w-50 mx-auto" style="margin-bottom:20px">
+        Se han actualizado correctamente los datos.
+    </div>
+{% endif %}
+{% endblock %}
+{% block script2 %}
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title>{% block titulo %}{% endblock %} </title>
+	<meta charset="utf8" />
+	<link rel="stylesheet" type="text/css" href="css/mercado.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	{% block estilo %}{% endblock %}
+    {% block script %}{% endblock %}
+</head>
+	{% block body %}
+	<body id="fondo">
+	{% endblock %}
+    {% block menu %}
+    <div class="navbar navbar-expand-lg navbar-light bg-light fondoNav">
+		<a class="navbar-brand" href="index.php?con=usuario&op=inicio&id={{ usuario.idUsuario }}">Mercado Municipal</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="index.php?con=usuario&op=inicio&id={{ usuario.idUsuario }}">Inicio</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?con=usuario&op=favoritos&id={{ usuario.idUsuario }}">Favoritos</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?con=usuario&op=editar&id={{ usuario.idUsuario }}">Perfil</a>
+				</li>
+				{% if usuario.idTipo == 2 %}
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?con=puesto&op=buscar&id={{ usuario.idUsuario }}">Mis puestos</a>
+				</li>
+				{% endif %}
+
+				<li class="nav-item">
+					<a class="nav-link" href="index.php?con=login&op=logout">Salir</a>
+				</li>
+			</ul>
+
+		</div> <!-- end-collapse -->
+
+		<div class="navbar-text blanco">
+			{{ usuario.nombre }} , bienvenid@
+		</div>
+		<img class="imgPerfil" src="img/{{ usuario.foto }}">
+
+	</div> <!-- end-navbar -->
+    {% endblock %}
+
+	{% block contenido %}
+    {% endblock %}
+
+</body>
+{% block script2 %}{% endblock %}
+</html>

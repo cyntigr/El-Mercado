@@ -1,0 +1,47 @@
+{% extends "base.php.twig" %}
+{% block titulo %} Login {% endblock %}
+{% block menu %}  {% endblock %}
+{% block contenido %}
+<div id="cont">
+	<div id="contenedor">
+		<h1 class="titulo">Mercado Municipal</h1>
+		{% if inicio == "true" %}
+		<button type="submit" form="envia" class="btn btn-success btn-ses">Iniciar Sesión</button>
+		<button type="submit" form="logueo" id="regis" class="btn btn-success btn-ses">Registro</button>
+		<form method="get" id="envia">
+			<input type="hidden" name="con" value="login"/>
+			<input type="hidden" name="op" value="inicio"/>
+			<input type="hidden" name="inicio" value="false"/>
+		</form>
+		<form method="get" id="logueo">
+			<input type="hidden" name="con" value="login"/>
+			<input type="hidden" name="op" value="registro"/>
+		</form>
+		{% endif %}
+
+		{% if inicio == "false" %}
+		<form method="get" id="registro" autocomplete="off" class="form-inline">
+
+			<input type="hidden" name="con" value="login"/>
+			<input type="hidden" name="op" value="login"/>
+			<!-- correo usuario -->
+			<input class="form-control mb-2 mr-sm-2" type="text" name="email" placeholder="email@flixnet.com" required />
+
+			<!-- contraseña usuario -->
+			<input class="form-control mb-2 mr-sm-2" type="password" name="contrasena" placeholder="contraseña" required />
+			{% if ok %}
+			<div class="col">
+				<div class="col-md-12 text-center">
+					<div class="alert alert-danger w-50" role="alert">
+						Usuario o contraseña incorrectas.
+					</div>
+				</div>
+			</div>
+			{% endif %}
+			<!-- botón LOGIN -->
+			<button class="arriba btn btn-success btn-ses" type="submit">Entrar</button>
+		</form>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.php.twig" %}
+{% block titulo %} Puestos {% if favoritos == "favoritos" %}- Favoritos {% endif %} {% endblock %}
+{% block body %}
+<body>
+{% endblock %}
+{% block contenido %}
+<div id="content">
+	<div class="row mb-2">
+	{% for item in puestos %}
+	<div class="col col-lg-3" >
+		<div class="card" style="width:300px; margin-top:10px">
+			<img class="card-img-top" style="height:200px" src="img/{{ item.foto }}" alt="Card image">
+			<div class="card-body">
+				<h4 class="card-title"><a href="index.php?con=puesto&op=info&id={{ usuario.idUsuario }}&idPuesto={{ item.idPuesto }}">{{ item.nombre }}</a></h4>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+	</div>
+</div>
+{% endblock %}
