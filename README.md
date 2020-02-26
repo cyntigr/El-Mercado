@@ -1,42 +1,49 @@
-# Mercado-Municipal
-Proyecto para Desarrollo Web en Entorno Servidor
+# El Mercado
+Proyecto Desarrollo Web Entorno Servidor DWES
+
 # Introducción
-Mi proyecto es una aplicación web para un mercado municipal, en el cual te podrás registrar, visualizar los puestos del mercado y el usuario registrado también tendrá control sobre sus datos personales y modificarlos si quisiera, o darse de baja en cualquier momento.
-Se podrá obtener información a cerca de los puestos que se encuentren registrados en el mercado, y añadirlos a una lista de favoritos
-para tener los que más te gustan.<br>
-Para una proxima ampliación, me gustaría que los usuarios puedan añadir sus propios comentarios a cerca de lo que les parece ese puesto en particular y darle una puntuación, también se podrán hacer pedidos para recoger en el puesto y contará con la división de la página por tipo de usuario.<br>
+Ampliación de mi aplicación web para el mercado municipal, he pasado la aplicación al Modelo Vista Controlador y he añadido un perfil de usuario nuevo, el de vendedor.<br>
+Para proximas ampliaciones me gustaría añadirle comentarios y pedidos a los puestos y un tercer usuario que administre los usuarios y la aplicación por completo.
 Para poder acceder a la web tenemos este usuario de prueba:<br>
-**Usuario: antonio@gmail.com<br>
+**Usuario vendedor: cyntigr@gmail.com<br>
 Contraseña: 12345**<br>
-Para poder acceder a la api tienes que estar logueado y con estos parámetros se pueden hacer las diferentes operaciones:<br>
-* Api: 'buenasPuedeProbarLaApi'<br>
-* Si se pone la dirección con la api-key te devuelve información de todos los puestos: 
-http://localhost/mercadoMunicipal/api/read_api.php?apiKey=buenasPuedeProbarLaApi<br>
-* Si en cambio pones la dirección de la api con el parámetro de id, nos devuelve información de un puesto concreto: http://localhost/mercadoMunicipal/api/read_api.php?apiKey=buenasPuedeProbarLaApi&id=1<br>
+**Usuario Cliente: vera@gmail.com<br>
+Contraseña: 12345**<br>
+He añadido la Api otra vez pero he implementado que se pueda solicitar la apiKey desde el perfil:<br>
+* Api vendedor: 'buenasPuedeProbarLaApi'<br>
+
+* Si se pone la dirección con la apiKey te devuelve información de todos los puestos: 
+https://mercadomunicipal.000webhostapp.com//index.php?con=api&op=infoGlobal&apiKey=buenasPuedeProbarLaApi<br>
+
+* Si en cambio pones la dirección de la api con el parámetro de id, nos devuelve información de un puesto concreto: https://mercadomunicipal.000webhostapp.com/index.php?con=api&op=infoPuesto&apiKey=buenasPuedeProbarLaApi&id=20<br>
+
 * Y la última operación consulta la información del usuario, si le mandas el parámetro de idUsuario relleno:
-http://localhost/mercadoMunicipal/api/read_api.php?apiKey=buenasPuedeProbarLaApi&idUsuario=si<br>
-**Por Cintia García Ruiz** <br>
+https://mercadomunicipal.000webhostapp.com/index.php?con=api&op=infoUsuario&apiKey=buenasPuedeProbarLaApi&idUsu=si<br>
+
+**Cintia García Ruiz** <br>
 **2º Desarrollo de Aplicaciones Web**<br>
 
 ## Página Index
-En esta página se puede elegir entre iniciar sesión o registrarse, internamente está oculto el cuadro para iniciar sesión y solo si pulsas iniciar sesión aparece para loguearse:
+En esta página podemos elegir iniciar sesión y que nos aparezca los campos ocultos que tenemos para loguearnos
+o registro y nos redirige a la página de registro:
 
 <img src="capturas/index.png" width="800px"><br>
 <img src="capturas/iniciar.png" width="800px"><br>
 
 ## Página Registro
-Aquí se puede registrar como nuevo usuario cuando entras de nuevas; Si no ponemos una imagen de usuario por defecto se añade una foto de un avatar para que no quede vacia, desde la base de datos se comprueba que el email es unico(añadiendo el campo como clave unica) para que no haya dos iguales registrados ya que la clave primaria es autoincremental y podrían haber insertado dos email iguales:
+Aquí nos podemos registrar como un nuevo usuario; Si no ponemos una imagen de usuario por defecto se añade una foto de un avatar para que no quede vacia, desde la base de datos se comprueba que el email es unico(añadiendo el campo como clave unica) para que no haya dos iguales registrados ya que la clave primaria es autoincremental y podrían haber insertado dos email iguales, en esta nueva versión he añadido un radio para elegir si eres vendedor o un cliente, eso no quiere decir que tengas los privilegios de vendedor, el administrador tendría que validar los datos una vez verificada la identidad:
 
 <img src="capturas/registro.png" width="800px"><br>
 <img src="capturas/registro2.png" width="800px"><br>
 
 ## Página Inicio
-Desde este apartado se pueden visualizar todos los puestos que hay registrados en la base de datos, seleccionar uno en concreto para ver su información o navegar por el menú del navbar, está puesto en ajax que primero se visualicen los primeros 8 puestos y según bajes el scroll aparezcan los demás puestos:
+Desde esta página visualizamos todos los puestos que tenemos en la base de datos, si es vendedor nos aparecera un enlace más en el navbar indicandonos Mis Puestos, desde este podemos acceder a ellos como veras en la segunda captura:
 
 <img src="capturas/inicio.png" width="800px"><br>
+<img src="capturas/inicio2.png" width="800px"><br>
 
 ## Página Información
-En esta página se visualiza la información de un puesto en concreto que se haya seleccionado; la foto del mismo, nombre,teléfono de contacto e información acerca de él. También tenemos dos botones con los que se puede añadir a nuestra página de favoritos o quitar:
+En esta página podemos ver la información de un puesto en concreto, visualizamos la imagen del puesto, el nombre y el teléfono. También al final aparecen dos botones para añadir ese puesto a tu apartado de favoritos o eliminarlo:
 
 <img src="capturas/info.png" width="800px"><br>
 <img src="capturas/favoritos.png" width="800px"><br>
@@ -45,17 +52,27 @@ En esta página se visualiza la información de un puesto en concreto que se hay
 <img src="capturas/pantallaFavorito.png" width="800px"><br>
 
 ## Página Perfil
-Aquí se visualizan los datos del usuario, y hay dos funciones a realizar, modificación de los datos y baja de usuario.<br>
-En el caso de que el usuario se quiera dar de baja aparece una ventana modal para poder confirmar que se quiere dar de baja.
-Si se pulsa guardar cambios, hay datos nuevos y no hay problemas en la modificación de los datos aparece un mensaje diciendo que se ha hecho correctamente,o en el caso de que no haya cambios o no se ejecute bien aparece un mensaje de alerta: 
+Desde el apartado del perfil podemos modificar los datos de ese usuario, cambiar la imagen...<br>
+En el caso de que el usuario se quiera dar de baja aparece una ventana modal para poder confirmar que se quiere dar de baja, y esta versión también he puesto un texto aclaratorio con el fin de indicar que se borraran todos los datos si decide borrar la cuenta.
+Para las modificaciones tendremos mensajes que nos indiquen si se han guardado los datos correctamente o si ha habido algun error: 
 
 <img src="capturas/perfil.png" width="800px"><br>
 <img src="capturas/perfil2.png" width="800px"><br>
+
+* Modal y mensajes
 <img src="capturas/perfilMensaje.png" width="800px"><br>
 <img src="capturas/perfilModalBaja.png" width="800px"><br>
 
+## Página Puestos
+En esta sección nueva de la web podemos añadir nuevos puestos, editarlos y borrarlos. Para acceder aquí es necesario tener las credenciales de tipo vendedor:
+
+<img src="capturas/listadoPuestos.png" width="800px"><br>
+<img src="capturas/editarPuesto.png" width="800px"><br>
+<img src="capturas/crearPuesto.png" width="800px"><br>
+<img src="capturas/editarPuesto2.png" width="800px"><br>
+
 ## Base de datos
-Modelo Entidad-Relación de mi proyecto , más las tablas y relaciones en la base de datos, en esta segunda se muestran todas las tablas que son necesarias para el proyecto final:
+Modelo Entidad-Relación de mi proyecto , más las tablas y relaciones en la base de datos:
 
 <img src="capturas/E-R.png" width="800px"><br>
 <img src="capturas/BaseDatos.png" width="800px"><br>
