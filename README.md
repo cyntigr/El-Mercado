@@ -1,5 +1,5 @@
 # El Mercado
-Proyecto Desarrollo Web Entorno Servidor DWES
+Proyecto Desarrollo Web Entorno Servidor
 
 # Introducción
 Ampliación de mi aplicación web para el mercado municipal, he pasado la aplicación al Modelo Vista Controlador y he añadido un perfil de usuario nuevo, el de vendedor.<br>
@@ -46,14 +46,15 @@ Desde esta página visualizamos todos los puestos que tenemos en la base de dato
 En esta página podemos ver la información de un puesto en concreto, visualizamos la imagen del puesto, el nombre y el teléfono. También al final aparecen dos botones para añadir ese puesto a tu apartado de favoritos o eliminarlo:
 
 <img src="capturas/info.png" width="800px"><br>
-<img src="capturas/favoritos.png" width="800px"><br>
 
 * Favoritos
+<img src="capturas/favoritos.png" width="800px"><br>
 <img src="capturas/pantallaFavorito.png" width="800px"><br>
 
 ## Página Perfil
 Desde el apartado del perfil podemos modificar los datos de ese usuario, cambiar la imagen...<br>
 En el caso de que el usuario se quiera dar de baja aparece una ventana modal para poder confirmar que se quiere dar de baja, y esta versión también he puesto un texto aclaratorio con el fin de indicar que se borraran todos los datos si decide borrar la cuenta.
+También he añadido un botón desde el cual el usuario puede solicitar su ApiKey y al momento aparece en un input desactivado para poder utilizarla cuando quiera.<br>
 Para las modificaciones tendremos mensajes que nos indiquen si se han guardado los datos correctamente o si ha habido algun error: 
 
 <img src="capturas/perfil.png" width="800px"><br>
@@ -69,13 +70,12 @@ En esta sección nueva de la web podemos añadir nuevos puestos, editarlos y bor
 <img src="capturas/listadoPuestos.png" width="800px"><br>
 <img src="capturas/editarPuesto.png" width="800px"><br>
 <img src="capturas/crearPuesto.png" width="800px"><br>
-<img src="capturas/editarPuesto2.png" width="800px"><br>
 
 ## Base de datos
 Modelo Entidad-Relación de mi proyecto , más las tablas y relaciones en la base de datos:
 
 <img src="capturas/E-R.png" width="800px"><br>
-<img src="capturas/BaseDatos.png" width="800px"><br>
+<img src="capturas/baseDatos.png" width="800px"><br>
 
 
 
